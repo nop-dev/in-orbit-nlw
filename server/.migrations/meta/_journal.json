@@ -5,15 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1725999699023,
-      "tag": "0000_military_deathstrike",
+      "when": 1726074339876,
+      "tag": "0000_mean_landau",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1726000070286,
-      "tag": "0001_daily_lockheed",
+      "when": 1726081016939,
+      "tag": "0001_lucky_gamora",
       "breakpoints": true
     }
   ]

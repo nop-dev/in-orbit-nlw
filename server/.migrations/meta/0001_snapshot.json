@@ -1,6 +1,6 @@
 {
-  "id": "0776eaee-0c9b-402e-b654-9004e381f7df",
-  "prevId": "c24cc3bb-6057-4327-b957-c5e7eae1fb76",
+  "id": "122a0f60-42c6-4ddf-b48e-c8527ec13d29",
+  "prevId": "7d5c0c85-bc2d-422c-ab86-981f4558ddc6",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -63,8 +63,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "desired_weekl_frequency": {
-          "name": "desired_weekl_frequency",
+        "desired_weekly_frequency": {
+          "name": "desired_weekly_frequency",
           "type": "integer",
           "primaryKey": false,
           "notNull": true

@@ -1,9 +1,45 @@
 {
-  "id": "c24cc3bb-6057-4327-b957-c5e7eae1fb76",
+  "id": "7d5c0c85-bc2d-422c-ab86-981f4558ddc6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.completed_goals": {
+      "name": "completed_goals",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "goal_id": {
+          "name": "goal_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "completed_goals_goal_id_goals_id_fk": {
+          "name": "completed_goals_goal_id_goals_id_fk",
+          "tableFrom": "completed_goals",
+          "tableTo": "goals",
+          "columnsFrom": [
+            "goal_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "public.goals": {
       "name": "goals",
       "schema": "",
@@ -20,8 +56,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "desired_weekl_frequency": {
-          "name": "desired_weekl_frequency",
+        "desired_weekly_frequency": {
+          "name": "desired_weekly_frequency",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
