@@ -1,22 +1,31 @@
 import fastify from "fastify";
+import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from "fastify-type-provider-zod";
+import z from "zod";
+
 import { createGoal } from "../features/create-goals";
-import z, { number } from "zod";
 
-const app = fastify();
+const app = fastify().withTypeProvider<ZodTypeProvider>();
 
-app.post('/goals', async req => {
-	const createGoalSchema = z.object({
-		title: z.string(),
-		desiredWeeklyFrequency: z.number().int().min(1).max(7),
-	})
+app.setValidatorCompiler(validatorCompiler);
+app.setSerializerCompiler(serializerCompiler);
 
-	const body = createGoalSchema.parse(req.body);
-
+app.post('/goals',
+	{
+	  schema: {
+	  	  body: z.object({
+		      title: z.string(),
+			  desiredWeeklyFrequency: z.number().int().min(1).max(7),
+			}),
+		}
+},
+async req => {
+	const { title, desiredWeeklyFrequency } = req.body;
+	
 	await createGoal({
-		title: body.title,
-		desiredWeeklyFrequency: body.desiredWeeklyFrequency
+		title,
+		desiredWeeklyFrequency,
 	})
-})
+});
 
 app
 	.listen({
