@@ -1,9 +1,10 @@
 import fastify from "fastify";
 import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from "fastify-type-provider-zod";
 
-import { createGoalRoute } from "./routes/create-a-goal";
-import { createGoalCompletionRoute } from "./routes/complete-a-goal";
-import { getPendingGoalsRoute } from "./routes/get-pending-goals";
+import { createGoalRoute } from "./routes/create-a-goal.routes";
+import { createGoalCompletionRoute } from "./routes/complete-a-goal.routes";
+import { getPendingGoalsRoute } from "./routes/get-pending-goals.routes";
+import { getWeekSummaryRoute } from "./routes/get-week-summary.routes";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -13,6 +14,7 @@ app.setSerializerCompiler(serializerCompiler);
 app.register(createGoalRoute)
 app.register(createGoalCompletionRoute)
 app.register(getPendingGoalsRoute)
+app.register(getWeekSummaryRoute)
 
 app
 	.listen({
