@@ -1,4 +1,13 @@
 {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "biomejs.biome",
+
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "mdx": "jsx",    
+    },
+
+    "emmet.syntaxProfiles": {
+        "javascript": "jsx",
+    }
 }
