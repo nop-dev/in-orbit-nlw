@@ -1,5 +1,9 @@
 import fastify from "fastify";
-import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from "fastify-type-provider-zod";
+import {
+	serializerCompiler,
+	validatorCompiler,
+	type ZodTypeProvider,
+} from "fastify-type-provider-zod";
 import { getWeekSummaryRoute } from "./routes/get-week-summary.routes";
 import fastifyCors from "@fastify/cors";
 
@@ -13,13 +17,13 @@ app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
 app.register(fastifyCors, {
-	origin: '*'
-})
+	origin: "*",
+});
 
-app.register(createGoalRoute)
-app.register(createGoalCompletionRoute)
-app.register(getPendingGoalsRoute)
-app.register(getWeekSummaryRoute)
+app.register(createGoalRoute);
+app.register(createGoalCompletionRoute);
+app.register(getPendingGoalsRoute);
+app.register(getWeekSummaryRoute);
 
 app
 	.listen({
