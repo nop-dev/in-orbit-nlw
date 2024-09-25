@@ -62,6 +62,12 @@ export async function getWeekPendingGoals() {
 			.groupBy(goalsCompletedInWeek.completedAtDate),
 	);
 
+	type goalsPerDay = Record<string, {
+		id: string
+		title: string
+		completedAt: string
+	}[]>
+
 	const result = await db
 		.with(goalsCreatedUpToWeek, goalsCompletedInWeek, goalsCompletedByWeekDay)
 		.select({
@@ -74,7 +80,7 @@ export async function getWeekPendingGoals() {
 					Number,
 				),
 
-			goalsPerDay: sql`JSON_OBJECT_AGG(
+			goalsPerDay: sql<goalsPerDay>`JSON_OBJECT_AGG(
                 ${goalsCompletedByWeekDay.completedAtDate},
                 ${goalsCompletedByWeekDay.completions}
             )`,
@@ -82,6 +88,6 @@ export async function getWeekPendingGoals() {
 		.from(goalsCompletedByWeekDay);
 
 	return {
-		summary: result,
+		summary: result[0],
 	};
 }

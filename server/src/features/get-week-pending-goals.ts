@@ -10,8 +10,6 @@ export async function getWeekPendingGoals() {
 	const firstDayOfWeek = dayjs().startOf("week").toDate();
 	const lastDayOfWeek = dayjs().endOf("week").toDate();
 
-	console.log(new Date().toString());
-
 	// Subconsulta para pegar as metas criadas até o final da semana
 	const goalsCreatedUpToWeek = db.$with("goals_created_up_to_week").as(
 		db
