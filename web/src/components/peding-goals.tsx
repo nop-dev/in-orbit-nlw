@@ -24,6 +24,9 @@ export function PendingGoals() {
 			await queryClient.invalidateQueries({
 				queryKey: ["summary"],
 			});
+			await queryClient.invalidateQueries({
+				queryKey: ["pending-goals"],
+			});
 		} catch (error) {
 			console.error("Error completing goal:", error);
 		}

@@ -12,8 +12,8 @@ type SummaryResponse = {
 };
 
 export async function getSummary(): Promise<SummaryResponse> {
-  const response = await fetch("http://localhost:3331/summary")
-	const data = await response.json()
+	const response = await fetch("http://localhost:3331/summary");
+	const data = await response.json();
 
-  return data.summary
-	}
+	return data.summary;
+}
