@@ -8,6 +8,7 @@ export function App() {
 	const { data } = useQuery({
 		queryKey: ["summary"],
 		queryFn: getSummary,
+		staleTime: 1000 * 60 // 60 secs
 	});
 
 	return (
