@@ -2,7 +2,7 @@ import { db } from "../db";
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import { completedGoals, goals } from "../db/schema";
-import { lte, gte, and, count, eq, sql } from "drizzle-orm";
+import { lte, gte, and, count, eq, sql, desc } from "drizzle-orm";
 
 dayjs.extend(weekOfYear);
 
@@ -59,7 +59,8 @@ export async function getWeekPendingGoals() {
             `.as("completions"),
 			})
 			.from(goalsCompletedInWeek)
-			.groupBy(goalsCompletedInWeek.completedAtDate),
+			.groupBy(goalsCompletedInWeek.completedAtDate)
+			.orderBy(desc(goalsCompletedInWeek.completedAtDate)),
 	);
 
 	type goalsPerDay = Record<string, {
