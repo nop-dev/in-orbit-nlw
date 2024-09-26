@@ -4,9 +4,9 @@ import ptBr from "dayjs/locale/pt-BR";
 import { GoCheckCircle, GoPlus } from "react-icons/go";
 import { getSummary } from "../http/get-summary";
 import { InOrbitIcon } from "./in-orbit-icon";
+import { PendingGoals } from "./peding-goals";
 import { Button } from "./ui/button";
 import { DialogTrigger } from "./ui/dialog";
-import { OutlineButton } from "./ui/outline-button";
 import { Progress, ProgressIndicator } from "./ui/progress-bar";
 import { Separator } from "./ui/separator";
 
@@ -64,58 +64,38 @@ export function Summary() {
 
 			<Separator />
 
-			<div className="flex gap-3 flex-wrap">
-				<OutlineButton>
-					<GoPlus className="size-4 text-zinc-600" />
-					Estudar
-				</OutlineButton>
-
-				<OutlineButton>
-					<GoPlus className="size-4 text-zinc-600" />
-					Praticar exercício
-				</OutlineButton>
-
-				<OutlineButton>
-					<GoPlus className="size-4 text-zinc-600" />
-					Arumar o quarto
-				</OutlineButton>
-
-				<OutlineButton>
-					<GoPlus className="size-4 text-zinc-600" />
-					Lavar a louça
-				</OutlineButton>
-			</div>
+			<PendingGoals />
 
 			<div className="flex flex-col gap-6">
 				<h2 className="text-xl font-medium">Sua semana</h2>
 			</div>
 
 			{Object.entries(data.goalsPerDay).map(([date, goals]) => {
-        const weekDay = dayjs(date).format('dddd')
-        const formatedDate = dayjs(date).format('D [ de ] MMMM')
+				const weekDay = dayjs(date).format("dddd");
+				const formatedDate = dayjs(date).format("D [ de ] MMMM");
 
 				return (
 					<div key={date} className="flex flex-col gap-4">
 						<h3 className="font-medium">
-							 <span className="capitalize">{weekDay}{" "}</span>
+							<span className="capitalize">{weekDay} </span>
 							<span className="text-zinc-400 text-xs">({formatedDate})</span>
 						</h3>
 
 						<ul className="flex flex-col gap-3">
-							{ goals.map(goal => {
-                const time = dayjs(goal.completedAt).format('HH:mm[h]')
+							{goals.map((goal) => {
+								const time = dayjs(goal.completedAt).format("HH:mm[h]");
 
-                return (
-                  <li key={goal.id} className="flex items-center gap-2">
-								<GoCheckCircle className="size-4 text-pink-500" />
-								<span className="text-sm text-zinc-400">
-									Você completou{" "}
-									<span className="text-zinc-100">"{goal.title}"</span> as{" "}
-									<span className="text-zinc-100">{time}</span>
-								</span>
-							</li>
-                )
-              })}
+								return (
+									<li key={goal.id} className="flex items-center gap-2">
+										<GoCheckCircle className="size-4 text-pink-500" />
+										<span className="text-sm text-zinc-400">
+											Você completou{" "}
+											<span className="text-zinc-100">"{goal.title}"</span> as{" "}
+											<span className="text-zinc-100">{time}</span>
+										</span>
+									</li>
+								);
+							})}
 						</ul>
 					</div>
 				);
