@@ -4,7 +4,7 @@ import ptBr from "dayjs/locale/pt-BR";
 import { GoCheckCircle, GoPlus } from "react-icons/go";
 import { getSummary } from "../http/get-summary";
 import { InOrbitIcon } from "./in-orbit-icon";
-import { PendingGoals } from "./peding-goals";
+import { PendingGoals } from "./pending-goals";
 import { Button } from "./ui/button";
 import { DialogTrigger } from "./ui/dialog";
 import { Progress, ProgressIndicator } from "./ui/progress-bar";
