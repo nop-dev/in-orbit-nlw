@@ -41,7 +41,10 @@ export async function getWeekPendingGoals() {
 					gte(completedGoals.createdAt, firstDayOfWeek),
 					lte(completedGoals.createdAt, lastDayOfWeek),
 				),
-			),
+			)
+			.orderBy(desc(completedGoals.createdAt
+				
+			))
 	);
 
 	const goalsCompletedByWeekDay = db.$with("goals_completed_by_week_day").as(
