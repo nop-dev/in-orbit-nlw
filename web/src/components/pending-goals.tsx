@@ -1,7 +1,9 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { GoPlus } from "react-icons/go";
+
 import { createGoalCompletion } from "../http/create-goal-completion";
 import { getPendingGoals } from "../http/get-pending-goals";
+
 import { OutlineButton } from "./ui/outline-button";
 
 export function PendingGoals() {

@@ -1,8 +1,8 @@
-import { db } from "../db";
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
+import { and, desc, eq, gte, lte, sql } from "drizzle-orm";
+import { db } from "../db";
 import { completedGoals, goals } from "../db/schema";
-import { lte, gte, and, count, eq, sql, desc } from "drizzle-orm";
 
 dayjs.extend(weekOfYear);
 
@@ -42,9 +42,7 @@ export async function getWeekPendingGoals() {
 					lte(completedGoals.createdAt, lastDayOfWeek),
 				),
 			)
-			.orderBy(desc(completedGoals.createdAt
-				
-			))
+			.orderBy(desc(completedGoals.createdAt)),
 	);
 
 	const goalsCompletedByWeekDay = db.$with("goals_completed_by_week_day").as(
@@ -66,11 +64,14 @@ export async function getWeekPendingGoals() {
 			.orderBy(desc(goalsCompletedInWeek.completedAtDate)),
 	);
 
-	type goalsPerDay = Record<string, {
-		id: string
-		title: string
-		completedAt: string
-	}[]>
+	type goalsPerDay = Record<
+		string,
+		{
+			id: string;
+			title: string;
+			completedAt: string;
+		}[]
+	>;
 
 	const result = await db
 		.with(goalsCreatedUpToWeek, goalsCompletedInWeek, goalsCompletedByWeekDay)
