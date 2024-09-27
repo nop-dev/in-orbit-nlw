@@ -1,5 +1,5 @@
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
-import { CheckCircle2, Circle } from 'lucide-react'
+import { FaRegCheckCircle, FaRegCircle  } from "react-icons/fa";
 
 export function RadioGroup(props: RadioGroupPrimitive.RadioGroupProps) {
   return (
@@ -22,8 +22,8 @@ export function RadioGroupItem(props: RadioGroupPrimitive.RadioGroupItemProps) {
 export function RadioGroupIndicator() {
   return (
     <>
-      <Circle className="size-4 text-zinc-600 group-data-[state=checked]:hidden" />
-      <CheckCircle2 className="size-4 text-pink-500 hidden group-data-[state=checked]:inline" />
+      <FaRegCircle className="size-4 text-zinc-600 group-data-[state=checked]:hidden" />
+      <FaRegCheckCircle className="size-4 text-pink-500 hidden group-data-[state=checked]:inline" />
     </>
   )
 }
