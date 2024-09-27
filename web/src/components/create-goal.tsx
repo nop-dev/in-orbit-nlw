@@ -1,7 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import { GoX } from "react-icons/go";
 import { z } from "zod";
+import { createGoal } from "../http/create-goal";
 import { Button } from "./ui/button";
 import {
 	DialogClose,
@@ -22,16 +24,27 @@ const createGoalForm = z.object({
 	desiredWeeklyFrequency: z.coerce.number().min(1).max(7),
 });
 
-type CreateGoalForm = z.infer<typeof createGoalForm>
+type CreateGoalForm = z.infer<typeof createGoalForm>;
 
 export function CreateGoal() {
-	const { register, control, handleSubmit, formState } = useForm<CreateGoalForm>({
-		resolver: zodResolver(createGoalForm),
-	});
+	const queryClient = useQueryClient();
 
-function handleCreateGoal(data : CreateGoalForm) {
-	console.log(data)
-}
+	const { register, control, handleSubmit, formState, reset } =
+		useForm<CreateGoalForm>({
+			resolver: zodResolver(createGoalForm),
+		});
+
+	async function handleCreateGoal(data: CreateGoalForm) {
+		await createGoal({
+			title: data.title,
+			desiredWeeklyFrequency: data.desiredWeeklyFrequency,
+		});
+
+		queryClient.invalidateQueries({ queryKey: ["summary"] });
+		queryClient.invalidateQueries({ queryKey: ["pending-goals"] });
+
+		reset();
+	}
 
 	return (
 		<DialogContent>
@@ -52,7 +65,10 @@ function handleCreateGoal(data : CreateGoalForm) {
 					</DialogDescription>
 				</div>
 
-				<form onSubmit={handleSubmit(handleCreateGoal)} className="flex-1 flex flex-col justify-between">
+				<form
+					onSubmit={handleSubmit(handleCreateGoal)}
+					className="flex-1 flex flex-col justify-between"
+				>
 					<div className="flex flex-col gap-6">
 						<div className="flex flex-col gap-2">
 							<Label htmlFor="title">Qual a atividade?</Label>
@@ -64,7 +80,9 @@ function handleCreateGoal(data : CreateGoalForm) {
 							/>
 
 							{formState.errors.title && (
-								<p className="text-red-400 text-sm">{formState.errors.title.message}</p>
+								<p className="text-red-400 text-sm">
+									{formState.errors.title.message}
+								</p>
 							)}
 						</div>
 
