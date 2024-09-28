@@ -105,4 +105,4 @@ in-orbit-nlw/
 | Nop-Dev, 2024 :rocket: |
 | --- |
 
-Deixe sua ⭐️ nesse repositório se você gostou do FocusTimer! Seu apoio é muito valioso para mim! 🚀
+Deixe sua ⭐️ nesse repositório se você gostou do inOrbit! Seu apoio é muito valioso para mim! 🚀
