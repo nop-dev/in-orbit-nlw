@@ -100,6 +100,8 @@ in-orbit-nlw/
 └── server/     # Código do back-end (Node.js, Fastify)
 ```
 
+---
+
 | Nop-Dev, 2024 :rocket: |
 | --- |
 
